@@ -201,7 +201,7 @@ while True:
         STATE = 2
         changed = True
         display.led(0)
-    if display.pressed(badger2040.BUTTON_A):
+    if display.pressed(badger2040.BUTTON_USER):
         STATE = 3
         changed = True
         display.led(0)
