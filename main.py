@@ -121,11 +121,12 @@ def draw_badge():
     display.line(WIDTH - IMAGE_WIDTH, HEIGHT - 1, WIDTH - 1, HEIGHT - 1)
     display.line(WIDTH - 1, 0, WIDTH - 1, HEIGHT - 1)
 
+    # Color the box real_name sits in
     display.pen(0)
     display.rectangle(1, 1, TEXT_WIDTH, RNAME_HEIGHT - 1)
 
-    # Draw the company
-    display.pen(15)  # Change this to 0 if a white background is used
+    # Draw the real_name title
+    display.pen(15)
     display.font(FONT_FACE)
     display.text(real_name, LEFT_PADDING, (RNAME_HEIGHT // 2) + 1, REAL_NAME_TEXT_SIZE)
 
@@ -138,7 +139,7 @@ def draw_badge():
     display.pen(0)
     display.font(FONT_FACE)
     display.thickness(4)
-    alias_size = 2.0  # A sensible starting scale
+    alias_size = 2.0
     while True:
         alias_length = display.measure_text(ALIAS, alias_size)
         if alias_length >= (TEXT_WIDTH - ALIAS_PADDING) and alias_size >= 0.1:
@@ -153,7 +154,7 @@ def draw_badge():
     display.rectangle(1, HEIGHT - DETAILS_HEIGHT * 2, TEXT_WIDTH, DETAILS_HEIGHT - 1)
     display.rectangle(1, HEIGHT - DETAILS_HEIGHT, TEXT_WIDTH, DETAILS_HEIGHT - 1)
 
-    # Draw the first detail's title and text
+    # Draw the detail pane
     display.pen(0)
     display.font(FONT_FACE)
     display.thickness(2)
@@ -162,7 +163,6 @@ def draw_badge():
     display.thickness(2)
     display.text(detail1_text, 5 + alias_length + DETAIL_SPACING, HEIGHT - ((DETAILS_HEIGHT * 3) // 2), DETAILS_TEXT_SIZE)
 
-    # Draw the second detail's title and text
     display.thickness(2)
     alias_length = display.measure_text(detail2_title, DETAILS_TEXT_SIZE)
     display.text(detail2_title, LEFT_PADDING, HEIGHT - (DETAILS_HEIGHT // 2), DETAILS_TEXT_SIZE)
@@ -196,29 +196,29 @@ while True:
     if display.pressed(badger2040.BUTTON_UP):
         STATE = 1
         changed = True
-        display.led(0)
+        display.led(0) # turn the led off while we wait for the change to process
     if display.pressed(badger2040.BUTTON_DOWN):
         STATE = 2
         changed = True
-        display.led(0)
+        display.led(0) # turn the led off while we wait for the change to process
     if display.pressed(badger2040.BUTTON_USER):
         STATE = 3
         changed = True
-        display.led(0)
+        display.led(0) # turn the led off while we wait for the change to process
     if changed:
         if STATE == 1:
             draw_badge()
             display.update()
             changed = False
-            display.led(255)
+            display.led(255) # Turn the LED on to tell the user were done
         if STATE == 2:
             draw_badge()
             display.update()
             changed = False
-            display.led(255)
+            display.led(255) # Turn the LED on to tell the user were done
         if STATE == 3:
             draw_sql_error()
             changed = False
-            display.led(255)
+            display.led(255) # Turn the LED on to tell the user were done
 
 
